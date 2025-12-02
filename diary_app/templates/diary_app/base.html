@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Diary</title>
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* Background animation */
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b, #0ea5e9);
+            background-size: 350% 350%;
+            animation: bgMove 12s infinite alternate ease-in-out;
+            min-height: 100vh;
+        }
+
+        @keyframes bgMove {
+            0% { background-position: left top; }
+            100% { background-position: right bottom; }
+        }
+
+        /* Glass effect */
+        .glass-card {
+            backdrop-filter: blur(22px);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        /* Inputs (SUPER IMPORTANT FOR VISIBLE TEXT) */
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.38);
+            color: #ffffff !important;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #e2e8f0 !important;
+            opacity: 0.8;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #93c5fd;
+            background: rgba(255, 255, 255, 0.32);
+            box-shadow: 0 0 10px rgba(147, 197, 253, 0.4);
+        }
+
+        label {
+            color: #f1f5f9 !important;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body class="flex flex-col">
+
+    <!-- NAVBAR -->
+    <nav class="glass-card mx-4 mt-4 p-4 rounded-2xl shadow-2xl flex justify-between items-center text-white">
+        <h1 class="text-2xl font-bold tracking-wide">✨ Secure Diary</h1>
+
+        {% if user.is_authenticated %}
+        <div class="flex items-center gap-4 text-white">
+            <span class="text-gray-200">{{ user.username }}</span>
+
+            <a href="{% url 'logout' %}"
+               class="px-4 py-2 rounded-xl bg-red-500/80 hover:bg-red-600 text-white font-semibold 
+                      shadow-lg transition-all duration-200">
+               Logout
+            </a>
+        </div>
+        {% endif %}
+    </nav>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <div class="flex-grow flex items-center justify-center p-6">
+        <div class="w-full max-w-lg">
+
+            {% for message in messages %}
+            <div class="glass-card p-4 rounded-xl text-red-300 font-semibold mb-4 shadow-xl">
+                {{ message }}
+            </div>
+            {% endfor %}
+
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+</body>
+</html>

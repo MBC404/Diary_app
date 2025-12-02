@@ -1,0 +1,25 @@
+{% extends 'diary_app/base.html' %}
+{% block content %}
+
+<h2 class="text-3xl font-extrabold text-center text-white mb-6">Your Diary</h2>
+
+<div class="text-center mb-6">
+    <a href="{% url 'diary_new' %}"
+       class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-2xl text-lg font-semibold shadow-xl transition">
+        + Add New Entry
+    </a>
+</div>
+
+<div class="space-y-4">
+    {% for entry in entries %}
+    <a href="{% url 'diary_detail' entry.pk %}"
+       class="glass-card p-6 rounded-2xl block shadow-xl transition hover:scale-[1.02]">
+        <h3 class="text-2xl font-bold text-white">{{ entry.title }}</h3>
+        <p class="text-gray-200 text-sm">{{ entry.created_at }}</p>
+    </a>
+    {% empty %}
+    <p class="text-center text-gray-300 text-lg">No entries yet.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'diary_app/base.html' %}
+{% block content %}
+
+<div class="glass-card p-8 rounded-3xl shadow-2xl text-white">
+    <h2 class="text-4xl font-extrabold mb-3">{{ entry.title }}</h2>
+    <p class="text-gray-300 mb-6">{{ entry.created_at }}</p>
+
+    <div class="text-gray-100 text-lg whitespace-pre-line leading-relaxed">
+        {{ entry.content }}
+    </div>
+
+    <div class="text-center mt-6">
+        <a href="{% url 'diary_home' %}"
+           class="text-blue-300 font-semibold hover:underline text-lg">
+           ← Back
+        </a>
+    </div>
+</div>
+
+{% endblock %}

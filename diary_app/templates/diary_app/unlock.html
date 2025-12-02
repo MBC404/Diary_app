@@ -1,0 +1,20 @@
+{% extends 'diary_app/base.html' %}
+{% block content %}
+
+<div class="glass-card p-8 rounded-3xl shadow-2xl text-white text-center">
+    <h2 class="text-4xl font-bold mb-4">🔒 Secure Diary</h2>
+    <p class="text-gray-200 mb-6 text-lg">Enter your 4-digit PIN</p>
+
+    <form method="post" class="space-y-6">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button class="w-full py-3 bg-indigo-500 hover:bg-indigo-600 rounded-2xl text-white text-lg font-semibold shadow-xl transition">
+            Unlock
+        </button>
+    </form>
+
+    <a href="{% url 'set_pin' %}" class="block mt-4 text-blue-300 font-semibold hover:underline">Set / Change PIN</a>
+</div>
+
+{% endblock %}

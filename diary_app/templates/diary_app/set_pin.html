@@ -1,0 +1,17 @@
+{% extends 'diary_app/base.html' %}
+{% block content %}
+
+<div class="bg-white p-6 rounded-xl shadow-lg">
+    <h2 class="text-2xl font-semibold mb-4 text-center text-gray-800">Set Your Diary PIN</h2>
+
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button class="w-full bg-purple-600 text-white py-2 rounded-md hover:bg-purple-700">
+            Save PIN
+        </button>
+    </form>
+</div>
+
+{% endblock %}
